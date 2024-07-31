@@ -35,6 +35,11 @@ text-align: center;
 color: #fff;
 margin-top: 100px;
 }
+
+form{
+    display: flex;
+    flex-direction: column;
+}
 `
 
 export const Label = styled.p`
@@ -50,7 +55,7 @@ width: 391.42px;
 height: 38.32px;
 border-radius: 5px;
 box-shadow: 3px 3px 10px 0px #4A90E230;
-border: none;
+border: ${props => (props.error ? '2px solid #cc1717;' : 'none')};
 padding-left: 10px;
 `
 
@@ -97,4 +102,11 @@ a{
     opacity: .6;
     }
 }
+`
+
+export const ErrorMessage = styled.p`
+font-size: 14px;
+line-height: 16px;
+color: #cc1717;
+margin-top: 2px;
 `
