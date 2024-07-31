@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 
 import LoginImg from '../../assets/burguer-login.svg'
 import Logo from '../../assets/logo.svg'
+import api from '../../services/api'
 
 import { Container, LoginImage, ContainerItems, Label, Input, Button, SignInLink, ErrorMessage } from './styles'
 
@@ -24,7 +25,14 @@ function Login() {
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = async (clientData) => {
+    const response = await api.post('session', {
+      email: clientData.email,
+      password: clientData.password
+    })
+
+    console.log(response)
+  }
 
   return (
     <Container>
