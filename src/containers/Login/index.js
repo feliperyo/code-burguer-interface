@@ -8,7 +8,8 @@ import LoginImg from '../../assets/burguer-login.svg'
 import Logo from '../../assets/logo.svg'
 import api from '../../services/api'
 
-import { Container, LoginImage, ContainerItems, Label, Input, Button, SignInLink, ErrorMessage } from './styles'
+import Button from "../../components/Button";
+import { Container, LoginImage, ContainerItems, Label, Input, SignInLink, ErrorMessage } from './styles'
 
 function Login() {
 
@@ -50,7 +51,7 @@ function Login() {
           <Input type="password" {...register("password")} error={errors.password?.message} />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
-          <Button type="submit">Entrar</Button>
+          <Button type="submit" style={{ marginTop: 75, marginBottom: 25 }}>Entrar</Button>
         </form>
 
         <SignInLink>Não possui conta? <a>Cadastrar</a></SignInLink>
