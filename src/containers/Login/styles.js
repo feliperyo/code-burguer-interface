@@ -47,7 +47,7 @@ font-size: 12px;
 font-weight: 500;
 line-height: 14.06px;
 color: #fff;
-margin: 28px 0 5px;
+margin: ${props => (props.error ? '18px 0 5px' : '28px 0 5px')};
 `
 
 export const Input = styled.input`

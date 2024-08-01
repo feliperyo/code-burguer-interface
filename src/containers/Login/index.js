@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form"
+import { toast } from 'react-toastify';
 
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from 'yup'
@@ -27,11 +28,18 @@ function Login() {
   })
 
   const onSubmit = async (clientData) => {
-    const response = await api.post('session', {
-      email: clientData.email,
-      password: clientData.password
-    })
-
+    const response = await toast.promise(
+      api.post('session', {
+        email: clientData.email,
+        password: clientData.password
+      }
+      ),
+      {
+        pending: 'Verificando seus dados',
+        success: 'Deu tudo certo 👌',
+        error: 'Verifique seu email e senha 🤯'
+      }
+    )
     console.log(response)
   }
 
@@ -43,11 +51,11 @@ function Login() {
         <h1>Login</h1>
 
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <Label>Email</Label>
+          <Label error={errors.email?.message}>Email</Label>
           <Input type="email" {...register("email")} error={errors.email?.message} />
           <ErrorMessage>{errors.email?.message}</ErrorMessage>
 
-          <Label>Senha</Label>
+          <Label error={errors.password?.message}>Senha</Label>
           <Input type="password" {...register("password")} error={errors.password?.message} />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
