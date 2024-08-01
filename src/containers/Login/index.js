@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from 'yup'
 
+import { useUser } from "../../hooks/UserContext";
 import LoginImg from '../../assets/burguer-login.svg'
 import Logo from '../../assets/logo.svg'
 import api from '../../services/api'
@@ -13,6 +14,9 @@ import Button from "../../components/Button";
 import { Container, LoginImage, ContainerItems, Label, Input, SignInLink, ErrorMessage } from './styles'
 
 function Login() {
+  const users = useUser()
+
+  console.log(users)
 
   const schema = Yup.object({
     email: Yup.string().email("Digite um email válido").required("O email é obrigatório"),
