@@ -14,9 +14,7 @@ import Button from "../../components/Button";
 import { Container, LoginImage, ContainerItems, Label, Input, SignInLink, ErrorMessage } from './styles'
 
 function Login() {
-  const users = useUser()
-
-  console.log(users)
+  const { putUserData, userData } = useUser()
 
   const schema = Yup.object({
     email: Yup.string().email("Digite um email válido").required("O email é obrigatório"),
@@ -32,7 +30,7 @@ function Login() {
   })
 
   const onSubmit = async (clientData) => {
-    const response = await toast.promise(
+    const { data } = await toast.promise(
       api.post('session', {
         email: clientData.email,
         password: clientData.password
@@ -44,7 +42,8 @@ function Login() {
         error: 'Verifique seu email e senha 🤯'
       }
     )
-    console.log(response)
+    putUserData(data)
+    console.log(userData)
   }
 
   return (
