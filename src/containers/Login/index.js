@@ -14,7 +14,7 @@ import Button from "../../components/Button";
 import { Container, LoginImage, ContainerItems, Label, Input, SignInLink, ErrorMessage } from './styles'
 
 function Login() {
-  const { putUserData, userData } = useUser()
+  const { putUserData } = useUser()
 
   const schema = Yup.object({
     email: Yup.string().email("Digite um email válido").required("O email é obrigatório"),
@@ -43,7 +43,6 @@ function Login() {
       }
     )
     putUserData(data)
-    console.log(userData)
   }
 
   return (
