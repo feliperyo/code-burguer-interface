@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form"
 import { toast } from 'react-toastify';
 
+import { Link } from "react-router-dom";
+
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from 'yup'
 
@@ -79,7 +81,7 @@ function Register() {
           <Button type="submit" style={{ marginTop: 25, marginBottom: 25 }}>Cadastrar</Button>
         </form>
 
-        <SignInLink>Já possui conta? <a>Entrar</a></SignInLink>
+        <SignInLink>Já possui conta? <Link style={{ color: 'white' }} to="/login">Entrar</Link></SignInLink>
       </ContainerItems>
     </Container>
   );
