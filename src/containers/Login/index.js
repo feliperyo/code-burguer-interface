@@ -20,7 +20,7 @@ function Login() {
 
   const { putUserData } = useUser()
 
-  const schema = Yup.object({
+  const schema = Yup.object().shape({
     email: Yup.string().email("Digite um email válido").required("O email é obrigatório"),
     password: Yup.string().required("Digite sua senha").min(6, "A senha deve ter pelo menos 6 dígitos"),
   })
@@ -28,9 +28,9 @@ function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema)
   })
 
   const onSubmit = async (clientData) => {
@@ -38,8 +38,7 @@ function Login() {
       api.post('session', {
         email: clientData.email,
         password: clientData.password
-      }
-      ),
+      }),
       {
         pending: 'Verificando seus dados',
         success: 'Deu tudo certo 👌',
