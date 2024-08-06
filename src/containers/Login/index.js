@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form"
 import { toast } from 'react-toastify';
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from 'yup'
@@ -16,6 +16,8 @@ import Button from "../../components/Button";
 import { Container, LoginImage, ContainerItems, Label, Input, SignInLink, ErrorMessage } from './styles'
 
 function Login() {
+  const history = useHistory()
+
   const { putUserData } = useUser()
 
   const schema = Yup.object({
@@ -45,6 +47,11 @@ function Login() {
       }
     )
     putUserData(data)
+
+    setTimeout(() => {
+      history.push('/')
+    }, 1000);
+
   }
 
   return (
