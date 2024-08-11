@@ -15,7 +15,9 @@ function OffersCarousel() {
         async function loadOffers() {
             const { data } = await api.get('products')
 
-            const onlyOffers = data.filter(product => product.offer)
+            const onlyOffers = data.filter(product => product.offer).map(product => {
+                return { ...product, formatedPrice: formatCurrency(product.price) }
+            })
 
             setOffers(onlyOffers)
         }
@@ -40,7 +42,7 @@ function OffersCarousel() {
                     <ContainerItems key={product.id}>
                         <Image src={product.url} alt="foto do produto" />
                         <p>{product.name}</p>
-                        <p>{formatCurrency(product.price)}</p>
+                        <p>{product.formatedPrice}</p>
                         <Button style={{ width: '100%', height: '50px', borderRadius: '8px' }}>Peça agora!</Button>
                     </ContainerItems>
                 ))}
