@@ -32,7 +32,7 @@ function CategoryCarousel() {
         <Container>
             <CategoryImg src={Category} alt="logo da categoria" />
 
-            <Carousel itemsToShow={4} style={{ width: '80%' }} breakPoints={breakPoints}>
+            <Carousel itemsToShow={5} style={{ width: '80%' }} breakPoints={breakPoints}>
                 {categories && categories.map(category => (
                     <ContainerItems key={category.id}>
                         <Image src={category.url} alt="foto da categoria" />
