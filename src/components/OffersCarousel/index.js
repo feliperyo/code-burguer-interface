@@ -6,6 +6,7 @@ import Offers from '../../assets/offers.png'
 import api from '../../services/api'
 import { Container, OfferImg, ContainerItems, Image } from "./styles";
 import Button from "../Button";
+import formatCurrency from '../../utils/formatCurrency'
 
 function OffersCarousel() {
     const [offers, setOffers] = useState([])
@@ -39,7 +40,7 @@ function OffersCarousel() {
                     <ContainerItems key={product.id}>
                         <Image src={product.url} alt="foto do produto" />
                         <p>{product.name}</p>
-                        <p>{product.price}</p>
+                        <p>{formatCurrency(product.price)}</p>
                         <Button style={{ width: '100%', height: '50px', borderRadius: '8px' }}>Peça agora!</Button>
                     </ContainerItems>
                 ))}
