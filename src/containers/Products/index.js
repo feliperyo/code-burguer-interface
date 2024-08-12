@@ -4,6 +4,7 @@ import ProductsLogo from '../../assets/products-logo.png'
 import { Container, ProductsImg, CategoriesMenu, CategoryButton, ProductsContainer } from "./styles";
 import api from '../../services/api'
 import CardProducts from "../../components/CardProducts";
+import formatCurrency from "../../utils/formatCurrency";
 
 function Products() {
     const [categories, setCategories] = useState([])
@@ -20,9 +21,13 @@ function Products() {
         }
 
         async function loadProducts() {
-            const { data } = await api.get('products')
+            const { data: allProducts } = await api.get('products')
 
-            setProducts(data)
+            const newProducts = allProducts.map(product => {
+                return { ...product, formatedPrice: formatCurrency(product.price) }
+            })
+
+            setProducts(newProducts)
         }
 
         loadProducts()

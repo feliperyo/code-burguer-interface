@@ -10,7 +10,7 @@ function CardProducts({ product }) {
 
             <div>
                 <ProductName>{product.name}</ProductName>
-                <ProductPrice>{product.price}</ProductPrice>
+                <ProductPrice>{product.formatedPrice}</ProductPrice>
                 <Button>Adicionar</Button>
             </div>
 

@@ -15,9 +15,11 @@ function OffersCarousel() {
         async function loadOffers() {
             const { data } = await api.get('products')
 
-            const onlyOffers = data.filter(product => product.offer).map(product => {
-                return { ...product, formatedPrice: formatCurrency(product.price) }
-            })
+            const onlyOffers = data
+                .filter(product => product.offer)
+                .map(product => {
+                    return { ...product, formatedPrice: formatCurrency(product.price) }
+                })
 
             setOffers(onlyOffers)
         }
