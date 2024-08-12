@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import ProductsLogo from '../../assets/products-logo.png'
 import { Container, ProductsImg, CategoriesMenu, CategoryButton, ProductsContainer } from "./styles";
 import api from '../../services/api'
-import CardProducts from "../../components/CardProducts";
 import formatCurrency from "../../utils/formatCurrency";
+
+import { CardProducts } from '../../components'
 
 function Products() {
     const [categories, setCategories] = useState([])

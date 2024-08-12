@@ -11,7 +11,7 @@ import RegisterImg from '../../assets/burguer-register.svg'
 import Logo from '../../assets/logo.svg'
 import api from '../../services/api'
 
-import Button from "../../components/Button";
+import { Button } from '../../components'
 import { Container, RegisterImage, ContainerItems, Label, Input, SignInLink, ErrorMessage } from './styles'
 
 function Register() {

@@ -5,10 +5,10 @@ import Carousel from 'react-elastic-carousel'
 import Offers from '../../assets/offers.png'
 import api from '../../services/api'
 import { Container, OfferImg, ContainerItems, Image } from "./styles";
-import Button from "../Button";
+import { Button } from '../../components'
 import formatCurrency from '../../utils/formatCurrency'
 
-function OffersCarousel() {
+export function OffersCarousel() {
     const [offers, setOffers] = useState([])
 
     useEffect(() => {
@@ -52,5 +52,3 @@ function OffersCarousel() {
         </Container>
     )
 }
-
-export default OffersCarousel
