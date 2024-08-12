@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import ProductsLogo from '../../assets/products-logo.png'
-import { Container, ProductsImg, CategoriesMenu, CategoryButton } from "./styles";
+import { Container, ProductsImg, CategoriesMenu, CategoryButton, ProductsContainer } from "./styles";
 import api from '../../services/api'
+import CardProducts from "../../components/CardProducts";
 
 function Products() {
     const [categories, setCategories] = useState([])
+    const [products, setProducts] = useState([])
     const [activeCategories, setActiveCategories] = useState(0)
 
     useEffect(() => {
@@ -17,6 +19,13 @@ function Products() {
             setCategories(newCategories)
         }
 
+        async function loadProducts() {
+            const { data } = await api.get('products')
+
+            setProducts(data)
+        }
+
+        loadProducts()
         loadCategories()
     }, [])
 
@@ -24,16 +33,23 @@ function Products() {
         <Container>
             <ProductsImg src={ProductsLogo} alt="logo home" />
             <CategoriesMenu>
-                {categories && categories.map(category => (
-                    <CategoryButton
-                        type="button"
-                        key={category.id}
-                        isActiveCategory={activeCategories === category.id}
-                        onClick={() => {
-                            setActiveCategories(category.id)
-                        }}>{category.name}</CategoryButton>
-                ))}
+                {categories &&
+                    categories.map(category => (
+                        <CategoryButton
+                            type="button"
+                            key={category.id}
+                            isActiveCategory={activeCategories === category.id}
+                            onClick={() => {
+                                setActiveCategories(category.id)
+                            }}>{category.name}</CategoryButton>
+                    ))}
             </CategoriesMenu>
+            <ProductsContainer>
+                {products &&
+                    products.map(product => (
+                        <CardProducts key={product.id} product={product} />
+                    ))}
+            </ProductsContainer>
         </Container>
     )
 }
