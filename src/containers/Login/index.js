@@ -16,7 +16,7 @@ import api from '../../services/api'
 import { Button } from '../../components'
 import { Container, LoginImage, ContainerItems, Label, Input, SignInLink, ErrorMessage } from './styles'
 
-function Login() {
+export function Login() {
   const history = useHistory()
 
   const { putUserData } = useUser()
@@ -78,5 +78,3 @@ function Login() {
     </Container>
   );
 }
-
-export default Login;

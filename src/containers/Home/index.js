@@ -5,7 +5,7 @@ import HomeLogo from '../../assets/home-logo.png'
 import { Container, HomeImg } from "./styles";
 import { CategoryCarousel, OffersCarousel } from '../../components'
 
-function Home() {
+export function Home() {
 
     return (
         <Container>
@@ -15,5 +15,3 @@ function Home() {
         </Container>
     )
 }
-
-export default Home

@@ -14,7 +14,7 @@ import api from '../../services/api'
 import { Button } from '../../components'
 import { Container, RegisterImage, ContainerItems, Label, Input, SignInLink, ErrorMessage } from './styles'
 
-function Register() {
+export function Register() {
 
   const schema = Yup.object({
     name: Yup.string().required('Digite seu nome'),
@@ -86,5 +86,3 @@ function Register() {
     </Container>
   );
 }
-
-export default Register;
