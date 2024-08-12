@@ -9,6 +9,7 @@ import formatCurrency from "../../utils/formatCurrency";
 function Products() {
     const [categories, setCategories] = useState([])
     const [products, setProducts] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([])
     const [activeCategories, setActiveCategories] = useState(0)
 
     useEffect(() => {
@@ -34,6 +35,16 @@ function Products() {
         loadCategories()
     }, [])
 
+    useEffect(() => {
+        if (activeCategories === 0) {
+            setFilteredProducts(products)
+        } else {
+            const newFilteredProducts = products.filter(product => product.category_id === activeCategories)
+
+            setFilteredProducts(newFilteredProducts)
+        }
+    }, [activeCategories, products])
+
     return (
         <Container>
             <ProductsImg src={ProductsLogo} alt="logo home" />
@@ -50,8 +61,8 @@ function Products() {
                     ))}
             </CategoriesMenu>
             <ProductsContainer>
-                {products &&
-                    products.map(product => (
+                {filteredProducts &&
+                    filteredProducts.map(product => (
                         <CardProducts key={product.id} product={product} />
                     ))}
             </ProductsContainer>
