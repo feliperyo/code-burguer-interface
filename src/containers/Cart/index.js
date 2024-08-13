@@ -2,15 +2,18 @@ import React from "react";
 
 import CartLogo from '../../assets/cart-logo.png'
 
-import { Container, CartImg } from "./styles";
-import { CartItems } from '../../components'
+import { Container, CartImg, Wrapper } from "./styles";
+import { CartItems, CartResume } from '../../components'
 
 export function Cart() {
 
     return (
         <Container>
             <CartImg src={CartLogo} alt="logo carrinho" />
-            <CartItems />
+            <Wrapper>
+                <CartItems />
+                <CartResume />
+            </Wrapper>
         </Container>
     )
 }
