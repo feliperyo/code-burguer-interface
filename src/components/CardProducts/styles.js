@@ -26,6 +26,7 @@ export const ProductName = styled.p`
 font-size: 16px;
 line-height: 19px;
 color: #000;
+width: 150px;
 `
 
 export const ProductPrice = styled.p`
