@@ -5,9 +5,11 @@ import { useCart } from "../../hooks/CartContext";
 
 import { Container, Image, ProductName, ProductPrice } from './styles'
 import { Button } from '../../components'
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export function CardProducts({ product }) {
     const { putProductsInCart } = useCart()
+    const { push } = useHistory()
 
     return (
         <Container>
@@ -16,7 +18,11 @@ export function CardProducts({ product }) {
             <div>
                 <ProductName>{product.name}</ProductName>
                 <ProductPrice>{product.formatedPrice}</ProductPrice>
-                <Button onClick={() => putProductsInCart(product)}>Adicionar</Button>
+                <Button
+                    onClick={() => {
+                        putProductsInCart(product)
+                        push('/carrinho')
+                    }}>Adicionar</Button>
             </div>
 
         </Container>
