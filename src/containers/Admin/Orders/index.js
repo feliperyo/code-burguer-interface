@@ -16,8 +16,6 @@ function Orders() {
     const [orders, setOrders] = useState([])
     const [rows, setRows] = useState([])
 
-    console.log(orders)
-
     useEffect(() => {
         async function loadOrders() {
             const { data } = await api.get('orders')
@@ -41,8 +39,6 @@ function Orders() {
         const newRows = orders.map(ord => createData(ord))
         setRows(newRows)
     }, [orders])
-
-    console.log(rows)
 
     return (
         <Container>

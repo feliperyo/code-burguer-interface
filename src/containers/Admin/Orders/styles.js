@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ReactSelect from "react-select";
 
 export const Container = styled.div`
 background-color: #EFEFEF;
@@ -15,4 +16,12 @@ export const InfoProducts = styled.div`
 display: flex;
 align-items: center;
 gap: 10px;
+`
+
+export const ReactSelectStyle = styled(ReactSelect)`
+width: 250px;
+
+.css-13cymwt-control{
+    cursor: pointer;
+}
 `
