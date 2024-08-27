@@ -1,17 +1,46 @@
 import React, { useEffect, useState } from "react";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from 'yup'
+
 import { Container, Label, Input, ButtonStyles, LabelUpload } from "./styles";
 import api from "../../../services/api";
 import ReactSelect from "react-select";
 import { useForm, Controller } from "react-hook-form";
 
 import UploadFileIcon from '@mui/icons-material/UploadFile';
+import { ErrorMessage } from "../../../components";
 
 export function NewProduct() {
     const [fileName, setFileName] = useState(null)
     const [categories, setCategories] = useState([])
-    const { register, handleSubmit, control } = useForm();
-    const onSubmit = data => console.log(data);
+
+    const schema = Yup.object().shape({
+        name: Yup.string().required('Digite o nome do produto'),
+        price: Yup.string().required('Digite o preço do produto'),
+        category: Yup.object().required('Escolha uma categoria'),
+        file: Yup.mixed().test('required', 'Carregue um arquivo', value => {
+            return value?.length > 0
+        }).test('fileSize', 'Sua imagem deve ter até 2mb', value => {
+            return value && value[0]?.size <= 200000
+        }).test('type', 'Apenas arquivos JPEG e PNG', value => {
+            return (
+                (value[0]?.type === 'image/jpeg') ||
+                (value[0]?.type === 'image/png')
+            )
+        })
+    })
+
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: { errors }
+    } = useForm({
+        resolver: yupResolver(schema)
+    })
+
+    const onSubmit = data => console.log(data)
 
     useEffect(() => {
         async function loadCategories() {
@@ -24,12 +53,14 @@ export function NewProduct() {
 
     return (
         <Container>
-            <form noValidate>
+            <form noValidate onSubmit={handleSubmit(onSubmit)}>
                 <Label>Nome</Label>
-                <Input type="text" {...register("name")} />
+                <Input type="text" {...register('name')} />
+                <ErrorMessage>{errors.name?.message}</ErrorMessage>
 
                 <Label>Preço</Label>
-                <Input type="number" {...register("price")} />
+                <Input type="number" {...register('price')} />
+                <ErrorMessage>{errors.price?.message}</ErrorMessage>
 
                 <LabelUpload>
                     {fileName ? fileName : (
@@ -47,6 +78,7 @@ export function NewProduct() {
                         }}
                     />
                 </LabelUpload>
+                <ErrorMessage>{errors.file?.message}</ErrorMessage>
 
                 <Controller
                     name="category_id"
@@ -63,6 +95,7 @@ export function NewProduct() {
                         )
                     }}
                 ></Controller>
+                <ErrorMessage>{errors.category?.message}</ErrorMessage>
 
                 <ButtonStyles>Adicionar produto</ButtonStyles>
             </form>
