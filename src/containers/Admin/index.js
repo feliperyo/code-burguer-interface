@@ -3,15 +3,25 @@ import Orders from './Orders'
 import { Container, ContainerItems } from './styles'
 import { SideMenuAdmin } from '../../components'
 import ListProducts from './ListProducts'
+import paths from "../../constants/paths";
 
-export function Admin() {
+import PropTypes from 'prop-types'
+
+export function Admin({ match: { path } }) {
+
     return (
         <Container>
             <SideMenuAdmin />
             <ContainerItems>
-                {/* <Orders /> */}
-                <ListProducts />
+                {path === paths.Order && <Orders />}
+                {path === paths.Products && <ListProducts />}
             </ContainerItems>
         </Container>
     )
+}
+
+Admin.propTypes = {
+    match: PropTypes.shape({
+        path: PropTypes.string
+    })
 }
