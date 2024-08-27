@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "../Button";
 
 export const Container = styled.div`
 background-color: #fff;
@@ -35,4 +36,10 @@ line-height: 21px;
 font-weight: 500;
 color: #000;
 margin-top: 30px;
+`
+
+export const ButtonStyle = styled(Button)`
+&:hover{
+   border-radius: 20px;
+}
 `

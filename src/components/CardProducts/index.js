@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 
 import { useCart } from "../../hooks/CartContext";
 
-import { Container, Image, ProductName, ProductPrice } from './styles'
-import { Button } from '../../components'
+import { Container, Image, ProductName, ProductPrice, ButtonStyle } from './styles'
+
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 
 export function CardProducts({ product }) {
     const { putProductsInCart } = useCart()
@@ -18,11 +19,11 @@ export function CardProducts({ product }) {
             <div>
                 <ProductName>{product.name}</ProductName>
                 <ProductPrice>{product.formatedPrice}</ProductPrice>
-                <Button
+                <ButtonStyle
                     onClick={() => {
                         putProductsInCart(product)
                         push('/carrinho')
-                    }}>Adicionar</Button>
+                    }}>Adicionar</ButtonStyle>
             </div>
 
         </Container>
