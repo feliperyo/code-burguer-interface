@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from '../../components'
 import BackgroundImage from '../../assets/bg-login.jpg'
 
 export const Container = styled.div`
@@ -79,10 +80,8 @@ a{
     }
 }
 `
-
-export const ErrorMessage = styled.p`
-font-size: 14px;
-line-height: 16px;
-color: #cc1717;
-margin-top: 2px;
+export const ButtonStyle = styled(Button)`
+&:hover{
+   border-radius: 20px;
+}
 `

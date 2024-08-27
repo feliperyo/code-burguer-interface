@@ -13,8 +13,8 @@ import Logo from '../../assets/logo.svg'
 import api from '../../services/api'
 
 
-import { Button } from '../../components'
-import { Container, LoginImage, ContainerItems, Label, Input, SignInLink, ErrorMessage } from './styles'
+import { ErrorMessage } from '../../components'
+import { Container, LoginImage, ContainerItems, Label, Input, SignInLink, ButtonStyle } from './styles'
 
 export function Login() {
   const history = useHistory()
@@ -75,7 +75,7 @@ export function Login() {
           <Input type="password" {...register("password")} error={errors.password?.message} />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
-          <Button type="submit" style={{ marginTop: 75, marginBottom: 25 }}>Entrar</Button>
+          <ButtonStyle type="submit" style={{ marginTop: 75, marginBottom: 25 }}>Entrar</ButtonStyle>
         </form>
 
         <SignInLink>Não possui conta? <Link style={{ color: 'white' }} to="/cadastro">Cadastrar</Link></SignInLink>
