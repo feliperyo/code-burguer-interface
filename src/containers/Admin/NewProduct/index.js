@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from 'yup'
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import { Container, Label, Input, ButtonStyles, LabelUpload } from "./styles";
 import api from "../../../services/api";
@@ -10,10 +11,12 @@ import { useForm, Controller } from "react-hook-form";
 
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { ErrorMessage } from "../../../components";
+import { toast } from "react-toastify";
 
 export function NewProduct() {
     const [fileName, setFileName] = useState(null)
     const [categories, setCategories] = useState([])
+    const { push } = useHistory()
 
     const schema = Yup.object().shape({
         name: Yup.string().required('Digite o nome do produto'),
@@ -40,7 +43,24 @@ export function NewProduct() {
         resolver: yupResolver(schema)
     })
 
-    const onSubmit = data => console.log(data)
+    const onSubmit = async data => {
+        const productDataFormData = new FormData()
+
+        productDataFormData.append('name', data.name)
+        productDataFormData.append('price', data.price)
+        productDataFormData.append('category_id', data.category.id)
+        productDataFormData.append('file', data.file[0])
+
+        await toast.promise(api.post('/products', productDataFormData), {
+            pending: 'Criando novo produto...',
+            success: 'Produto criado com sucesso!',
+            error: 'Falha ao criar o produto, tente novamente.'
+        })
+
+        setTimeout(() => {
+            push('/listar-produtos')
+        }, 2000);
+    }
 
     useEffect(() => {
         async function loadCategories() {
@@ -68,14 +88,16 @@ export function NewProduct() {
 
                 <div>
                     <LabelUpload>
-                        {fileName ? fileName : (
+                        {fileName || (
                             <>
                                 <UploadFileIcon />
                                 Carregue a imagem do produto
                             </>
                         )}
+
                         <input
                             type="file"
+                            id="image-input"
                             accept="image/png, image/jpeg"
                             {...register("file")}
                             onChange={value => {
@@ -88,7 +110,7 @@ export function NewProduct() {
 
                 <div>
                     <Controller
-                        name="category_id"
+                        name="category"
                         control={control}
                         render={({ field }) => {
                             return (
